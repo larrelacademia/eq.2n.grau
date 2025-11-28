@@ -35,6 +35,26 @@
       box-shadow: 0 20px 45px rgba(0,0,0,0.5);
       border: 1px solid rgba(148, 163, 184, 0.25);
     }
+
+    /* 🔹 Logo */
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+    .logo-wrap img {
+      max-width: 180px;
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.95;
+      transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+    }
+    .logo-wrap img:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
     h1 {
       margin: 0 0 8px;
       font-size: 1.4rem;
@@ -241,6 +261,17 @@
 </head>
 <body>
   <div class="card">
+
+    <!-- 🔹 Logo L'Arrel Acadèmia -->
+    <div class="logo-wrap">
+      <a href="https://www.larrelacademia.cat/" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://i.ibb.co/Q7YJTwgn/PRINCIPAL-BEIGE.png"
+          alt="L'Arrel Acadèmia - Logo"
+        />
+      </a>
+    </div>
+
     <h1>
       <span>2</span>
       Equació de segon grau
@@ -536,35 +567,35 @@
       }
 
       // Números a l’eix Y (si existeix)
-if (x0Screen !== null) {
-  ctx.textAlign = 'right';
-  const labelOffsetX = (x0Screen > 30) ? -6 : 24;
+      if (x0Screen !== null) {
+        ctx.textAlign = 'right';
+        const labelOffsetX = (x0Screen > 30) ? -6 : 24;
 
-  // Decidim cada quants valors posem número (per no saturar)
-  const rangeY = yEndGrid - yStartGrid;
-  let labelStepY = 1;
-  if (rangeY > 10) labelStepY = 2;
-  if (rangeY > 20) labelStepY = 5;
-  if (rangeY > 40) labelStepY = 10;
+        // Decidim cada quants valors posem número (per no saturar)
+        const rangeY = yEndGrid - yStartGrid;
+        let labelStepY = 1;
+        if (rangeY > 10) labelStepY = 2;
+        if (rangeY > 20) labelStepY = 5;
+        if (rangeY > 40) labelStepY = 10;
 
-  for (let yi = yStartGrid; yi <= yEndGrid; yi += step) {
-    const sy = toScreenY(yi);
-    // Tick petit
-    ctx.strokeStyle = '#9ca3af';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(x0Screen - 3, sy);
-    ctx.lineTo(x0Screen + 3, sy);
-    ctx.stroke();
+        for (let yi = yStartGrid; yi <= yEndGrid; yi += step) {
+          const sy = toScreenY(yi);
+          // Tick petit
+          ctx.strokeStyle = '#9ca3af';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(x0Screen - 3, sy);
+          ctx.lineTo(x0Screen + 3, sy);
+          ctx.stroke();
 
-    // només numerem alguns valors per evitar "amuntegar"
-    if (Math.abs(yi) < 1e-12) continue; // el 0 ja es veu a l’origen
-    if (yi % labelStepY !== 0) continue;
+          // només numerem alguns valors per evitar "amuntegar"
+          if (Math.abs(yi) < 1e-12) continue; // el 0 ja es veu a l’origen
+          if (yi % labelStepY !== 0) continue;
 
-    ctx.textBaseline = 'middle';
-    ctx.fillText(yi.toString(), x0Screen + labelOffsetX, sy);
-  }
-}
+          ctx.textBaseline = 'middle';
+          ctx.fillText(yi.toString(), x0Screen + labelOffsetX, sy);
+        }
+      }
 
       // Dibuixar paràbola
       ctx.strokeStyle = '#60a5fa';
