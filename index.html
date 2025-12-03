@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -337,7 +338,7 @@
           📈 Gràfic de la paràbola
         </div>
         <div class="graph-card">
-          <canvas id="parabola-canvas" width="420" height="260"></canvas>
+          <canvas id="parabola-canvas" width="650" height="390"></canvas>
           <div class="graph-hint">
             Es representa la funció <em>y = ax<sup>2</sup> + bx + c</em> i es marquen els punts de tall amb l’eix X
             quan hi ha solucions reals.
@@ -510,11 +511,18 @@
 
       const step = 1;
 
+      // Graella suau i nítida
+      ctx.strokeStyle = 'rgba(75,85,99,0.30)';
+      ctx.lineWidth = 0.5;
+      ctx.setLineDash([4, 4]);
+
+      const stepBase = 1;
+
       // Línies verticals
       const xStartGrid = Math.ceil(xMin);
       const xEndGrid = Math.floor(xMax);
-      for (let xi = xStartGrid; xi <= xEndGrid; xi += step) {
-        const sx = toScreenX(xi);
+      for (let xi = xStartGrid; xi <= xEndGrid; xi += stepBase) {
+        const sx = Math.round(toScreenX(xi)) + 0.5; // 🔹 alineat a píxel
         ctx.beginPath();
         ctx.moveTo(sx, 0);
         ctx.lineTo(sx, h);
@@ -524,8 +532,8 @@
       // Línies horitzontals
       const yStartGrid = Math.ceil(yMin);
       const yEndGrid = Math.floor(yMax);
-      for (let yi = yStartGrid; yi <= yEndGrid; yi += step) {
-        const sy = toScreenY(yi);
+      for (let yi = yStartGrid; yi <= yEndGrid; yi += stepBase) {
+        const sy = Math.round(toScreenY(yi)) + 0.5; // 🔹 alineat a píxel
         ctx.beginPath();
         ctx.moveTo(0, sy);
         ctx.lineTo(w, sy);
@@ -534,9 +542,10 @@
 
       ctx.setLineDash([]);
 
+
       // ✨ Números als eixos
       ctx.fillStyle = '#9ca3af';
-      ctx.font = '11px system-ui, sans-serif';
+      ctx.font = '18px system-ui, sans-serif';
 
       // Números a l’eix X (si existeix)
       if (y0Screen !== null) {
@@ -599,7 +608,7 @@
 
       // Dibuixar paràbola
       ctx.strokeStyle = '#60a5fa';
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 3;
       ctx.beginPath();
       for (let i = 0; i <= samples; i++) {
         const x = xMin + (i / samples) * (xMax - xMin);
@@ -625,7 +634,7 @@
             const sx = toScreenX(xr);
             const sy = toScreenY(0);
             ctx.beginPath();
-            ctx.arc(sx, sy, 4, 0, Math.PI * 2);
+            ctx.arc(sx, sy, 6, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -726,22 +735,14 @@
           <span class="label">Equació:</span>
           <span class="value">${eqHTML}</span>
         </div>
-        <div class="poly-line">
-          <span class="label">Discriminant:</span>
-          <span class="value">Δ = b<sup>2</sup> − 4ac = ${deltaStr}</span>
-        </div>
+        
         <div class="poly-line">
           <span class="label">Tipus de solucions:</span>
           <span class="emph">${tipus}</span>
         </div>
         ${solucionsHTML}
         <div class="poly-line" style="margin-top:6px; font-size:0.8rem; color:var(--muted);">
-          <span class="label">Fórmula general:</span>
-          <span class="value">
-            x = <span style="white-space:nowrap;">
-              (−b ± √Δ) / (2a)
-            </span>
-          </span>
+          
         </div>
       `;
 
