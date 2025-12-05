@@ -2,54 +2,68 @@
 <html lang="ca">
 <head>
   <meta charset="UTF-8">
-  <title>Equació de segon grau – Calculadora</title>
+  <title>Equació de segon grau</title>
   <!-- 🔹 Important per a que sigui responsive al mòbil -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tipografies de marca: Paytone One + Urbanist -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Urbanist:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #0b1226;
-      --panel: #0e1530;
-      --accent: #60a5fa;
-      --accent2: #34d399;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --danger: #f97373;
-      --border: #334155;
+      /* Paleta inspirada en el manual de marca */
+      --lima: #d5f476;        /* Verd lima - destacats / fons suau */
+      --blanc: #f9f8ef;       /* Blanc cru - targetes */
+      --fucsia: #ff3d78;      /* Fúcsia - accent principal */
+      --jade: #00a874;        /* Verd jade - accent secundari */
+      --text: #000000;        /* Text principal en negre */
+      --text2: #1f2937;       /* Text secundari gris fosc */
+      --danger: #ff3d78;      /* Fúcsia també per errors/avisos */
+      --border: #5c3a93;      /* Morat per a contorns */
+      --lila: #d5bef7;        /* Lila claret */
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at top, #111827 0, #020617 40%);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background:
+        radial-gradient(circle at top left, #ffaac9 0, #d5f476 35%, #d5bef7 70%, #5c3a93 100%);
+      font-family: "Urbanist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       color: var(--text);
       padding: 16px;
     }
+
     .card {
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 16px;
+      background: var(--blanc);
+      border-radius: 18px;
       padding: 20px 24px 24px;
-      max-width: 900px;
+      max-width: 1000px; /* 🔹 una mica més ample */
       width: 100%;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.5);
-      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow:
+        0 18px 35px rgba(0, 0, 0, 0.18),
+        0 0 0 2px rgba(0, 0, 0, 0.05);
+      border: 2px solid var(--border);
     }
 
-    /* 🔹 Logo */
+    /* 🔹 Logo capçalera */
     .logo-wrap {
       display: flex;
       justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: 20px;
     }
     .logo-wrap img {
-      max-width: 180px;
+      max-width: 200px;
       width: 100%;
       height: auto;
       display: block;
-      opacity: 0.95;
+      opacity: 0.9;
       transition: opacity 0.15s ease-out, transform 0.15s ease-out;
     }
     .logo-wrap img:hover {
@@ -57,29 +71,54 @@
       transform: translateY(-1px);
     }
 
+    /* 🔹 Logo final/imagotip */
+    .logo-footer {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+    }
+    .logo-footer img {
+      max-width: 50px;
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.9;
+      transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+    }
+    .logo-footer img:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
     h1 {
       margin: 0 0 8px;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       display: flex;
       align-items: center;
       gap: 8px;
+      font-family: "Paytone One", system-ui, sans-serif;
+      letter-spacing: 0.02em;
+      color: var(--text);
     }
     h1 span {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, var(--accent2), var(--accent));
+      background: var(--jade);
       font-weight: 700;
-      font-size: 0.9rem;
-      color: #0b1120;
+      font-size: 1rem;
+      color: #ffffff;
+      box-shadow: 0 0 0 2px #ffffff;
     }
+
     .subtitle {
       margin: 0 0 16px;
-      font-size: 0.9rem;
-      color: var(--muted);
+      font-size: 0.95rem;
+      color: var(--text2);
+      line-height: 1.5;
     }
 
     .grid {
@@ -92,28 +131,39 @@
       display: block;
       font-size: 0.9rem;
       margin-bottom: 4px;
-      color: var(--muted);
+      color: var(--text2);
+      font-weight: 500;
     }
     input[type="number"] {
       width: 100%;
       padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: #020617;
+      border-radius: 10px;
+      border: 1.5px solid rgba(0, 0, 0, 0.12);
+      background: #ffffff;
       color: var(--text);
       font-size: 0.9rem;
       outline: none;
-      transition: border 0.15s, box-shadow 0.15s, background 0.15s;
+      transition: border 0.15s, box-shadow 0.15s, background 0.15s, transform 0.08s;
     }
     input[type="number"]:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(96,165,250,0.6);
-      background: #020617;
+      border-color: var(--fucsia);
+      box-shadow: 0 0 0 2px rgba(255, 61, 120, 0.25);
+      background: #ffffff;
+      transform: translateY(-1px);
     }
+
+    /* 🔹 Sliders per a, b, c */
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--fucsia);
+      margin-top: 4px;
+    }
+
     .hint {
       font-size: 0.8rem;
-      color: var(--muted);
+      color: var(--text2);
       margin-top: 2px;
+      opacity: 0.9;
     }
 
     .coef-row {
@@ -125,7 +175,13 @@
     .coef-item {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 4px;
+    }
+
+    .coef-item span {
+      font-size: 0.85rem;
+      color: var(--text2);
+      font-weight: 500;
     }
 
     .btn-row {
@@ -139,21 +195,26 @@
       border: none;
       padding: 8px 18px;
       font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: transform 0.08s ease-out, box-shadow 0.12s ease-out, background 0.15s;
+      transition:
+        transform 0.08s ease-out,
+        box-shadow 0.12s ease-out,
+        background 0.15s,
+        border 0.15s;
+      font-family: "Urbanist", system-ui, sans-serif;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #3b82f6);
-      color: #0b1120;
-      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
+      background: linear-gradient(135deg, var(--fucsia), #ff7ca5);
+      color: #ffffff;
+      box-shadow: none;
     }
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 26px rgba(37, 99, 235, 0.45);
+      box-shadow: 0 14px 22px rgba(255, 61, 120, 0.46);
     }
 
     .pill {
@@ -161,43 +222,48 @@
       align-items: center;
       gap: 6px;
       font-size: 0.78rem;
-      padding: 4px 9px;
+      padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15, 118, 110, 0.18);
-      color: #6ee7b7;
+      background: #00a8741f; /* verd jade molt suau */
+      color: var(--jade);
       margin-bottom: 8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
     .results {
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 12px 14px 10px;
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.18), rgba(15,23,42,0.95));
-      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: #ffffff;
+      border: 1.5px solid rgba(0, 0, 0, 0.12);
       min-height: 80px;
       font-size: 0.9rem;
+      margin-top: 14px;
       margin-bottom: 14px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
     }
     .results h2 {
       font-size: 0.95rem;
       margin: 0 0 6px;
-      color: var(--muted);
-      font-weight: 600;
+      color: var(--text2);
+      font-weight: 700;
     }
     .poly-line {
       margin: 2px 0;
-      font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 0.9rem;
       word-wrap: break-word;
     }
     .poly-line span.label {
-      color: var(--muted);
+      color: var(--text2);
     }
     .poly-line span.value {
-      color: #f9fafb;
+      color: var(--text);
     }
     .poly-line span.emph {
-      color: var(--accent2);
-      font-weight: 600;
+      color: var(--jade);
+      font-weight: 700;
     }
     .tag {
       display: inline-flex;
@@ -206,9 +272,10 @@
       padding: 2px 6px;
       font-size: 0.7rem;
       border-radius: 999px;
-      background: rgba(148, 163, 184, 0.18);
-      color: var(--muted);
+      background: #d5f476;
+      color: #000000;
       margin-left: 6px;
+      font-weight: 600;
     }
 
     .error {
@@ -233,15 +300,16 @@
 
     /* Contenidor del gràfic */
     .graph-card {
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 10px 12px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: #ffffff;
+      border: 1.5px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
     }
     #parabola-canvas {
       width: 100%;
       max-width: 420px;
-      height: 260px;
+      height: 326px;
       border-radius: 10px;
       border: 1px solid rgba(148,163,184,0.4);
       background: #020617;
@@ -250,9 +318,9 @@
     }
     .graph-hint {
       font-size: 0.78rem;
-      color: var(--muted);
+      color: var(--text2);
       text-align: center;
-      margin-top: 4px;
+      margin-top: 12px;
     }
 
     /* 🔹 Ajustos per a mòbil */
@@ -263,18 +331,18 @@
       }
       .card {
         padding: 16px 14px 18px;
-        border-radius: 12px;
+        border-radius: 14px;
       }
       .grid {
         grid-template-columns: minmax(0, 1fr);
         gap: 16px;
       }
       h1 {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         flex-wrap: wrap;
       }
       .subtitle {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
       }
       .results {
         font-size: 0.85rem;
@@ -295,14 +363,14 @@
     <div class="logo-wrap">
       <a href="https://www.larrelacademia.cat/" target="_blank" rel="noopener noreferrer">
         <img
-          src="https://i.ibb.co/Q7YJTwgn/PRINCIPAL-BEIGE.png"
-          alt="L'Arrel Acadèmia - Logo"
+          src="https://i.ibb.co/TDpf3BHr/PRINCIPAL-FUCSIA.png"
+          alt="L'Arrel Acadèmia - Logo principal fúcsia"
         />
       </a>
     </div>
 
     <h1>
-      <span>2</span>
+      <span>2º</span>
       Equació de segon grau
     </h1>
     <p class="subtitle">
@@ -311,10 +379,10 @@
     </p>
 
     <div class="grid">
-      <!-- Panell d'entrada -->
+      <!-- Columna esquerra: coeficients + resultats -->
       <div>
         <div class="pill">
-          ⚙️ Coeficients de l’equació
+          <strong>⚙️ Coeficients de l’equació</strong>
         </div>
 
         <form id="quad-form">
@@ -322,16 +390,19 @@
             <label>Introdueix els coeficients:</label>
             <div class="coef-row">
               <div class="coef-item">
-                <span style="font-size:0.85rem; color:var(--muted);"><strong>a:</strong></span>
+                <span><strong>a:</strong></span>
                 <input id="a" type="number" step="any" value="1">
+                <input id="aRange" type="range" min="-7" max="7" step="0.1" value="1">
               </div>
               <div class="coef-item">
-                <span style="font-size:0.85rem; color:var(--muted);"><strong>b:</strong></span>
+                <span><strong>b:</strong></span>
                 <input id="b" type="number" step="any" value="0">
+                <input id="bRange" type="range" min="-10" max="10" step="0.1" value="0">
               </div>
               <div class="coef-item">
-                <span style="font-size:0.85rem; color:var(--muted);"><strong>c:</strong></span>
+                <span><strong>c:</strong></span>
                 <input id="c" type="number" step="any" value="0">
+                <input id="cRange" type="range" min="-10" max="10" step="0.1" value="0">
               </div>
             </div>
             <div class="hint">
@@ -347,32 +418,40 @@
 
           <div id="error" class="error"></div>
         </form>
-      </div>
 
-      <!-- Panell de resultats + gràfic -->
-      <div>
-        <div class="pill">
-          📊 Resultats de l’equació
+        <!-- 🔹 Resultats just a sota dels coeficients -->
+        <div class="pill" style="margin-top: 16px;">
+          <strong>📊 Resultats de l’equació</strong>
         </div>
         <div class="results" id="results">
           <h2>En espera de dades…</h2>
-          <p style="margin: 4px 0 0;">
+          <p style="margin: 4px 0 0; color: var(--text2);">
             Escriu els valors de <strong>a</strong>, <strong>b</strong> i <strong>c</strong> i prem
             <strong>«Resoldre equació»</strong>.
           </p>
         </div>
+      </div>
 
+      <!-- Columna dreta: només gràfic -->
+      <div>
         <div class="pill">
-          📈 Gràfic de la paràbola
+          <strong>📈 Gràfic de la paràbola</strong>
         </div>
         <div class="graph-card">
-          <canvas id="parabola-canvas" width="650" height="390"></canvas>
+          <canvas id="parabola-canvas" width="650" height="493"></canvas>
           <div class="graph-hint">
             Es representa la funció <em>y = ax<sup>2</sup> + bx + c</em> i es marquen els punts de tall amb l’eix X
             quan hi ha solucions reals.
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- 🔹 Logo final (imagotip) -->
+    <div class="logo-footer">
+      <a href="https://www.larrelacademia.cat/" target="_blank" rel="noopener noreferrer">
+        <img src="https://i.ibb.co/PvJdJ31H/IMAGOTIP-FUCSIA.png" alt="L'Arrel Acadèmia - Imagotip fúcsia" />
+      </a>
     </div>
   </div>
 
@@ -442,56 +521,21 @@
 
       // Si a és gairebé 0, no dibuixem (no seria de segon grau)
       if (Math.abs(a) < 1e-12) {
-        ctx.fillStyle = '#9ca3af';
-        ctx.font = '12px system-ui, sans-serif';
+        ctx.fillStyle = '#d5f476';
+        ctx.font = '20px system-ui, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('No es pot dibuixar la paràbola perquè a = 0.', w / 2, h / 2);
         return;
       }
 
-      // Vèrtex per centrar el rang en x
-      const xv = -b / (2 * a);
+      // 🔹 FINESTRA FIXA DE COORDENADES
+      const xMin = -7;
+      const xMax =  7;
+      const yMin = -10;
+      const yMax =  10;
 
-      // Rang de x al voltant del vèrtex
-      let xMin = xv - 5;
-      let xMax = xv + 5;
-
-      if (!isFinite(xMin) || !isFinite(xMax)) {
-        xMin = -5;
-        xMax = 5;
-      }
-      if (Math.abs(xMax - xMin) < 1e-6) {
-        xMin -= 5;
-        xMax += 5;
-      }
-
-      // Calcular rang de y a partir de la paràbola en aquest rang
-      const samples = 200;
-      let yMin = Infinity;
-      let yMax = -Infinity;
-      for (let i = 0; i <= samples; i++) {
-        const x = xMin + (i / samples) * (xMax - xMin);
-        const y = a * x * x + b * x + c;
-        if (y < yMin) yMin = y;
-        if (y > yMax) yMax = y;
-      }
-
-      if (!isFinite(yMin) || !isFinite(yMax)) {
-        yMin = -5;
-        yMax = 5;
-      }
-      if (Math.abs(yMax - yMin) < 1e-6) {
-        yMin -= 5;
-        yMax += 5;
-      }
-
-      // Afegim un marge
-      const marginY = 0.1 * (yMax - yMin);
-      yMin -= marginY;
-      yMax += marginY;
-
-      // Funcions de transformació
+      // Escales
       const scaleX = w / (xMax - xMin);
       const scaleY = h / (yMax - yMin);
 
@@ -502,13 +546,12 @@
         return h - (y - yMin) * scaleY;
       }
 
-      // Fons
-      ctx.fillStyle = '#020617';
+      // Fons del canvas
+      ctx.fillStyle = '#322d36';
       ctx.fillRect(0, 0, w, h);
 
       // Eixos
-      ctx.lineWidth = 1;
-
+      ctx.lineWidth = 2;
       let x0Screen = null;
       let y0Screen = null;
 
@@ -532,16 +575,9 @@
         ctx.stroke();
       }
 
-      // Graella lleugera
-      ctx.strokeStyle = 'rgba(75,85,99,0.3)';
-      ctx.lineWidth = 0.5;
-      ctx.setLineDash([4, 4]);
-
-      const step = 1;
-
-      // Graella suau i nítida
+      // Graella suau
       ctx.strokeStyle = 'rgba(75,85,99,0.30)';
-      ctx.lineWidth = 0.5;
+      ctx.lineWidth = 0;
       ctx.setLineDash([4, 4]);
 
       const stepBase = 1;
@@ -550,7 +586,7 @@
       const xStartGrid = Math.ceil(xMin);
       const xEndGrid = Math.floor(xMax);
       for (let xi = xStartGrid; xi <= xEndGrid; xi += stepBase) {
-        const sx = Math.round(toScreenX(xi)) + 0.5; // 🔹 alineat a píxel
+        const sx = Math.round(toScreenX(xi)) + 0.5;
         ctx.beginPath();
         ctx.moveTo(sx, 0);
         ctx.lineTo(sx, h);
@@ -561,7 +597,7 @@
       const yStartGrid = Math.ceil(yMin);
       const yEndGrid = Math.floor(yMax);
       for (let yi = yStartGrid; yi <= yEndGrid; yi += stepBase) {
-        const sy = Math.round(toScreenY(yi)) + 0.5; // 🔹 alineat a píxel
+        const sy = Math.round(toScreenY(yi)) + 0.5;
         ctx.beginPath();
         ctx.moveTo(0, sy);
         ctx.lineTo(w, sy);
@@ -570,19 +606,18 @@
 
       ctx.setLineDash([]);
 
-
       // ✨ Números als eixos
-      ctx.fillStyle = '#9ca3af';
-      ctx.font = '18px system-ui, sans-serif';
+      ctx.fillStyle = '#e5e7eb';
+      ctx.font = '20px system-ui, sans-serif';
+      const step = 1;
 
-      // Números a l’eix X (si existeix)
+      // Números a l’eix X
       if (y0Screen !== null) {
         ctx.textAlign = 'center';
         const labelOffsetY = (y0Screen < h - 18) ? 12 : -6;
 
         for (let xi = xStartGrid; xi <= xEndGrid; xi += step) {
           const sx = toScreenX(xi);
-          // Tick petit
           ctx.strokeStyle = '#9ca3af';
           ctx.lineWidth = 1;
           ctx.beginPath();
@@ -590,34 +625,32 @@
           ctx.lineTo(sx, y0Screen + 3);
           ctx.stroke();
 
-          // Label (evitem posar el 0 dues vegades si també surt a l’eix Y)
           if (Math.abs(xi) < 1e-12) continue;
           ctx.textBaseline = (labelOffsetY > 0) ? 'top' : 'bottom';
           ctx.fillText(xi.toString(), sx, y0Screen + labelOffsetY);
         }
 
-        // Etiqueta 0 a l’origen si també hi ha eix Y
         if (x0Screen !== null) {
           ctx.textBaseline = (labelOffsetY > 0) ? 'top' : 'bottom';
           ctx.fillText('0', x0Screen + 10, y0Screen + labelOffsetY);
         }
       }
 
-      // Números a l’eix Y (si existeix)
+      // Números a l’eix Y
       if (x0Screen !== null) {
         ctx.textAlign = 'right';
         const labelOffsetX = (x0Screen > 30) ? -6 : 24;
 
-        // Decidim cada quants valors posem número (per no saturar)
-        const rangeY = yEndGrid - yStartGrid;
+        const yStartGrid2 = yStartGrid;
+        const yEndGrid2 = yEndGrid;
+        const rangeY = yEndGrid2 - yStartGrid2;
         let labelStepY = 1;
         if (rangeY > 10) labelStepY = 2;
         if (rangeY > 20) labelStepY = 5;
         if (rangeY > 40) labelStepY = 10;
 
-        for (let yi = yStartGrid; yi <= yEndGrid; yi += step) {
+        for (let yi = yStartGrid2; yi <= yEndGrid2; yi += step) {
           const sy = toScreenY(yi);
-          // Tick petit
           ctx.strokeStyle = '#9ca3af';
           ctx.lineWidth = 1;
           ctx.beginPath();
@@ -625,8 +658,7 @@
           ctx.lineTo(x0Screen + 3, sy);
           ctx.stroke();
 
-          // només numerem alguns valors per evitar "amuntegar"
-          if (Math.abs(yi) < 1e-12) continue; // el 0 ja es veu a l’origen
+          if (Math.abs(yi) < 1e-12) continue;
           if (yi % labelStepY !== 0) continue;
 
           ctx.textBaseline = 'middle';
@@ -634,9 +666,10 @@
         }
       }
 
-      // Dibuixar paràbola
-      ctx.strokeStyle = '#60a5fa';
-      ctx.lineWidth = 3;
+      // 🔹 Paràbola
+      const samples = 200;
+      ctx.strokeStyle = '#f9f8ef';
+      ctx.lineWidth = 4;
       ctx.beginPath();
       for (let i = 0; i <= samples; i++) {
         const x = xMin + (i / samples) * (xMax - xMin);
@@ -651,18 +684,18 @@
       // ✨ Punts de tall amb l’eix X (solucions reals)
       const delta = b * b - 4 * a * c;
       if (delta >= 0 && y0Screen !== null) {
-        const sqrtDelta = Math.sqrt(Math.max(delta, 0)); // per si delta és -0 numèricament
+        const sqrtDelta = Math.sqrt(Math.max(delta, 0));
         const x1 = (-b + sqrtDelta) / (2 * a);
         const x2 = (-b - sqrtDelta) / (2 * a);
 
-        ctx.fillStyle = '#34d399'; // verd per als punts
+        ctx.fillStyle = '#ff3d78';
 
         function dibuixaPuntSiDins(xr) {
           if (xr >= xMin && xr <= xMax && isFinite(xr)) {
             const sx = toScreenX(xr);
             const sy = toScreenY(0);
             ctx.beginPath();
-            ctx.arc(sx, sy, 6, 0, Math.PI * 2);
+            ctx.arc(sx, sy, 8, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -674,15 +707,19 @@
       }
     }
 
-    document.getElementById('quad-form').addEventListener('submit', function (e) {
-      e.preventDefault();
+    // 🔹 Funció central per calcular resultats + dibuixar
+    function calculaIDibuixa() {
       const errorEl = document.getElementById('error');
       const resultsEl = document.getElementById('results');
       errorEl.textContent = '';
 
-      const aStr = document.getElementById('a').value.trim();
-      const bStr = document.getElementById('b').value.trim();
-      const cStr = document.getElementById('c').value.trim();
+      const aInput = document.getElementById('a');
+      const bInput = document.getElementById('b');
+      const cInput = document.getElementById('c');
+
+      const aStr = aInput.value.trim();
+      const bStr = bInput.value.trim();
+      const cStr = cInput.value.trim();
 
       const a = Number(aStr.replace(',', '.'));
       const b = Number(bStr.replace(',', '.'));
@@ -692,11 +729,7 @@
         errorEl.textContent = 'Tots els coeficients han de ser nombres vàlids.';
         return;
       }
-      if (Math.abs(a) < 1e-12) {
-        errorEl.textContent = 'El coeficient a no pot ser 0 en una equació de segon grau.';
-        dibuixaParabola(0, b, c);
-        return;
-      }
+      
 
       // Discriminant
       const delta = b * b - 4 * a * c;
@@ -755,7 +788,6 @@
       }
 
       const eqHTML = formatQuadraticEquation(a, b, c);
-      const deltaStr = formatNumber(delta);
 
       const html = `
         <h2>Resultat de l’equació</h2>
@@ -763,22 +795,62 @@
           <span class="label">Equació:</span>
           <span class="value">${eqHTML}</span>
         </div>
-        
+
         <div class="poly-line">
           <span class="label">Tipus de solucions:</span>
           <span class="emph">${tipus}</span>
         </div>
         ${solucionsHTML}
-        <div class="poly-line" style="margin-top:6px; font-size:0.8rem; color:var(--muted);">
-          
-        </div>
       `;
 
       resultsEl.innerHTML = html;
 
       // Dibuixar la paràbola i els punts de tall amb l’eix X
       dibuixaParabola(a, b, c);
+    }
+
+    // 🔹 En prémer el botó
+    document.getElementById('quad-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      calculaIDibuixa();
     });
+
+    // 🔹 Sincronització sliders <-> inputs i càlcul en temps real
+    const aInput = document.getElementById('a');
+    const bInput = document.getElementById('b');
+    const cInput = document.getElementById('c');
+    const aRange = document.getElementById('aRange');
+    const bRange = document.getElementById('bRange');
+    const cRange = document.getElementById('cRange');
+
+    // Quan mouem el slider: actualitza input i recalcula
+    aRange.addEventListener('input', () => {
+      aInput.value = aRange.value;
+      calculaIDibuixa();
+    });
+    bRange.addEventListener('input', () => {
+      bInput.value = bRange.value;
+      calculaIDibuixa();
+    });
+    cRange.addEventListener('input', () => {
+      cInput.value = cRange.value;
+      calculaIDibuixa();
+    });
+
+    // Quan canviem el número: actualitza slider (clamp -10..10) i recalcula
+    function syncNumberToRange(inputEl, rangeEl) {
+      const raw = inputEl.value.trim();
+      const val = Number(raw.replace(',', '.'));
+      if (Number.isNaN(val)) return;
+      const clamped = Math.max(-10, Math.min(10, val));
+      rangeEl.value = clamped;
+      inputEl.value = clamped;
+      calculaIDibuixa();
+    }
+
+    aInput.addEventListener('change', () => syncNumberToRange(aInput, aRange));
+    bInput.addEventListener('change', () => syncNumberToRange(bInput, bRange));
+    cInput.addEventListener('change', () => syncNumberToRange(cInput, cRange));
 
     // Dibuix inicial (a=1, b=0, c=0)
     window.addEventListener('load', function() {
@@ -787,4 +859,3 @@
   </script>
 </body>
 </html>
-
