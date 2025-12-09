@@ -23,6 +23,7 @@
       --danger: #ff3d78;      /* Fúcsia també per errors/avisos */
       --border: #5c3a93;      /* Morat per a contorns */
       --lila: #d5bef7;        /* Lila claret */
+      --muted: #6b7280;       /* Text suau (peu de pàgina) */
     }
 
     * { box-sizing: border-box; }
@@ -73,7 +74,8 @@
 
     /* 🔹 Logo final/imagotip */
     .logo-footer {
-      margin-top: 35px;
+      margin-top: 1px;
+      margin-bottom: 13px;
       display: flex;
       justify-content: center;
     }
@@ -88,6 +90,20 @@
     .logo-footer img:hover {
       opacity: 1;
       transform: translateY(-1px);
+    }
+
+    /* 🔹 Peu de pàgina (línia superior + espai) */
+    .footer {
+      margin-top: 20px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      padding-top: 10px;
+      min-height: 14px;
     }
 
     h1 {
@@ -353,6 +369,10 @@
       .graph-hint {
         font-size: 0.75rem;
       }
+      .footer {
+        flex-direction: column;
+        font-size: 0.75rem;
+      }
     }
   </style>
 </head>
@@ -447,11 +467,17 @@
       </div>
     </div>
 
-    <!-- 🔹 Logo final (imagotip) -->
+    <!-- 🔹 Peu de pàgina: línia + imagotip + text -->
+    <div class="footer"></div>
+
     <div class="logo-footer">
       <a href="https://www.larrelacademia.cat/" target="_blank" rel="noopener noreferrer">
         <img src="https://i.ibb.co/PvJdJ31H/IMAGOTIP-FUCSIA.png" alt="L'Arrel Acadèmia - Imagotip fúcsia" />
       </a>
+    </div>
+
+    <div style="text-align:center; margin-top:6px; font-size:0.75rem; color:var(--muted);">
+      © 2025 L'Arrel Acadèmia · Simuladors educatius
     </div>
   </div>
 
