@@ -871,7 +871,7 @@
       const raw = inputEl.value.trim();
       const val = Number(raw.replace(',', '.'));
       if (Number.isNaN(val)) return;
-      const clamped = Math.max(-150, Math.min(150, val));
+      const clamped = Math.max(-999999, Math.min(999999, val));
       rangeEl.value = clamped;
       inputEl.value = clamped;
       calculaIDibuixa();
@@ -888,4 +888,5 @@
   </script>
 </body>
 </html>
+
 
